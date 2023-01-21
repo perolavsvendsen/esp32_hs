@@ -2,12 +2,12 @@ MicroPython implementation of 3 x DS28B20 temperature sensors on an ESP32
 that updates corresponding devices in Homeseer.
 
 ## Contents
-boot.py
-main.py
+- boot.py
+- main.py
 
 ## Setup instructions
 
-- Wire the DS18X20 to the ESP32. Recommend these instructions:
+- Wire the DS18X20 to the ESP32. Instructions:
   https://randomnerdtutorials.com/esp32-ds18b20-temperature-arduino-ide/
 - Wire the LEDs to the ESP32
 - Flash the ESP32 with MicroPython. Instructions:
