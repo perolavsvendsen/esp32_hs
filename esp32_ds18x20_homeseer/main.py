@@ -33,17 +33,17 @@ WIFIPWD = "your-password-here"  # your password
 HOST = "192.xxx.xxx.xxx"  # Homeseer IP adress
 PORT = 1234  # Homeseer port
 
-# List of devices connected to the ESP32. Run "initialize()" once to print the
-# connected devices, then put corresponding bytestrings into dictionary below.
-# Identify each device by manipulating the temperature while watching the
-# readings. Recommend to do this without sending values to HS, by printing
-# values and monitoring directly.
-
 DEVICES = {
     "Nr 0": {"rom": b"<adress>", "hsdeviceref": 9999},  # device adress, and...
     "Nr 1": {"rom": b"<adress>", "hsdeviceref": 9999},  # ...hs device ref...
     "Nr 2": {"rom": b"<adress>", "hsdeviceref": 9999},  # to write to
 }
+
+# DEVICES contains the devices connected to the ESP32. First, run this script
+# to list the physical adresses of the connected sensors, copy/paste them into
+# DEVICES. Then identify each individual sensor (if using more than one) by
+# manipulating readings while running this script and monitoring the output.
+# If less than three sensors are used, comment away lines above until correct.
 
 
 class LED:
@@ -131,7 +131,12 @@ def initialize():
     for d in DEVICES:
         if DEVICES[d]["rom"] not in roms:
             RED.blink(3)
+            print("=============")
+            print("Connected devices:")
             print(f"roms: {roms}")
+            print("=============")
+            print("If this is first run, this is expected.")
+            print("Copy physical addresses above into DEVICES.")
             raise RuntimeError(f"Device {d} not found!")
 
     for adress in roms:
