@@ -41,7 +41,7 @@ DEVICES = {
 
 # DEVICES contains the devices connected to the ESP32. First, run this script
 # to list the physical adresses of the connected sensors, copy/paste them into
-# DEVICES. Then identify each individual sensor (if using more than one) by
+# "rom". Then identify each individual sensor (if using more than one) by
 # manipulating readings while running this script and monitoring the output.
 # If less than three sensors are used, comment away lines above until correct.
 
@@ -58,14 +58,18 @@ class LED:
     
     def __init__(self, pin):
         self.led = machine.Pin(pin, machine.Pin.OUT)
-        self.led.value(0) # off
+        self.off()
   
     def blink(self, count, interval_ms=200):
-        """Blink myself."""
+        """Blink LED."""
         for i in range(count):
             self.led.value(not self.led.value())
             sleep_ms(interval_ms)
+        self.off()
 
+    def off(self):
+        """Turn LED off."""
+        self.led.value(0)
 
 def connect_to_wifi():
     """Connect ESP32 to WiFi using the global settings."""
